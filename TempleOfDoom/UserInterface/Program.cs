@@ -4,9 +4,10 @@ using Data;
 namespace UserInterface {
     internal class Program {
         static void Main(string[] args) {
-            JSONReader reader = new();
+            IDataReader reader = new JSONReader();
+            DataReaderContext context = new DataReaderContext(reader);
             string currentLevel = "../../../../Data/TempleOfDoom_Extended_C_2223.json";
-            Level level = reader.ReadData(currentLevel);
+            RootDTO root = context.ReadDataFromFile(currentLevel);
         }
     }
 }

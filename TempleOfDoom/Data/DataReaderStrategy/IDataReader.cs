@@ -1,8 +1,7 @@
 ﻿using Data;
-using System.Text.Json;
 
-namespace GameLogic.Interfaces {
+namespace Data.DataReaderStrategy {
     public interface IDataReader {
-        public Level ReadData(string filePath);
+        RootDTO ReadData(string filePath);
     }
 }
