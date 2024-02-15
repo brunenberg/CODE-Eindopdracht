@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameLogic.Items.Traps {
-    public class DisappearingBoobyTrap {
+    public class DisappearingBoobyTrap : Trap {
     }
 }

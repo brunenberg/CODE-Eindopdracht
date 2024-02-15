@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameLogic.Items {
-    public class PressurePlate {
+    public class PressurePlate : Item {
     }
 }

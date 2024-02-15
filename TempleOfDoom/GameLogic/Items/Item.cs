@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLogic.Models {
-    internal class Game {
+namespace GameLogic.Items {
+    public abstract class Item {
     }
 }
