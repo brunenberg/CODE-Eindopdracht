@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameLogic.Doors {
-    public class ColoredDoor : Door {
-        public string? Color { get; set; }
+namespace GameLogic.Tiles {
+    public class Wall {
     }
 }

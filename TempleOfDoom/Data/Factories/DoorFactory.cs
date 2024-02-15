@@ -12,8 +12,9 @@ namespace Data.Factories {
         public static Door Create(DoorDTO dto) {
             switch (dto.type) {
                 case "colored":
-                    ColoredDoor coloredDoor = new ColoredDoor();
-                    coloredDoor.Color = dto.color;
+                    ColoredDoor coloredDoor = new ColoredDoor() {
+                        Color = dto.color
+                    };
                     return coloredDoor;
                 case "toggle":
                     ToggleDoor toggleDoor = new ToggleDoor();
@@ -27,8 +28,11 @@ namespace Data.Factories {
                 case "open on stones in room":
                     OpenOnStonesInRoomDoor openOnStonesInRoomDoor = new OpenOnStonesInRoomDoor();
                     return openOnStonesInRoomDoor;
+                case "switched":
+                    SwitchDoor switchDoor = new SwitchDoor();
+                    return switchDoor;
                 default:
-                    throw new ArgumentException("Unknown item type" + dto.type);
+                    throw new ArgumentException($"Unknown item type '{dto.type}'");
             }
         }
     }
