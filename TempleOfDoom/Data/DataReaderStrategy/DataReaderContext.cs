@@ -1,6 +1,4 @@
-﻿using GameLogic.Interfaces;
-using System.Text.Json;
-
+﻿
 namespace Data.DataReaderStrategy {
     public class DataReaderContext {
 
@@ -14,7 +12,7 @@ namespace Data.DataReaderStrategy {
             _dataReader = dataReader;
         }
 
-        public Level ReadDataFromFile(string filePath) {
+        public RootDTO ReadDataFromFile(string filePath) {
             return _dataReader.ReadData(filePath);
         }
     }
