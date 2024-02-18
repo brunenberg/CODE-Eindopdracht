@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameLogic.Doors {
-    public class Door {
-        public Connection Connection { get; set; }
+    public abstract class Door {
+        /*public string Type { get; set; }
+        public abstract bool CanOpen(GameState gameState);*/
     }
 }

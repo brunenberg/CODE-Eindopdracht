@@ -6,6 +6,5 @@ using System.Threading.Tasks;
 
 namespace GameLogic.Tiles {
     public class Wall {
-
     }
 }

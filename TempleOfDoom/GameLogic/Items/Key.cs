@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameLogic.Items {
-    public class Key {
+    public class Key : Item {
+        public string? Color { get; set; }
     }
 }

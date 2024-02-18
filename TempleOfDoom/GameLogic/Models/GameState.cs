@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Factories {
-    internal class GameFactory {
+namespace GameLogic.Models {
+    public class GameState {
     }
 }

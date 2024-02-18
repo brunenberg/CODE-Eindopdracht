@@ -12,8 +12,9 @@ namespace Data.Factories {
         public static Door Create(DoorDTO dto) {
             switch (dto.type) {
                 case "colored":
-                    ColoredDoor coloredDoor = new ColoredDoor();
-                    coloredDoor.Color = dto.color;
+                    ColoredDoor coloredDoor = new ColoredDoor() {
+                        Color = dto.color
+                    };
                     return coloredDoor;
                 case "toggle":
                     ToggleDoor toggleDoor = new ToggleDoor();
