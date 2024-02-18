@@ -1,7 +1,12 @@
-﻿namespace UserInterface {
+﻿using Data.DataReaderStrategy;
+using Data;
+
+namespace UserInterface {
     internal class Program {
         static void Main(string[] args) {
-            Console.WriteLine("Hello, World!");
+            JSONReader reader = new();
+            string currentLevel = "../../../../Data/TempleOfDoom_Extended_C_2223.json";
+            Level level = reader.ReadData(currentLevel);
         }
     }
 }
