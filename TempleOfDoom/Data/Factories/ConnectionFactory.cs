@@ -1,4 +1,5 @@
-﻿using GameLogic.Doors;
+﻿using GameLogic.Decorators;
+using GameLogic.Doors;
 using GameLogic.Items;
 using GameLogic.Models;
 using System;
@@ -15,7 +16,7 @@ namespace Data.Factories {
                 South = dto.SOUTH,
                 West = dto.WEST,
                 East = dto.EAST,
-                Door = dto.doors != null ? dto.doors.Select(doorDto => DoorFactory.Create(doorDto)).ToList() : new List<Door>(),
+                Door = DoorFactory.Create(dto.doors),
             };
         }
     }

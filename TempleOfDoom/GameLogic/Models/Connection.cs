@@ -1,4 +1,5 @@
-﻿using GameLogic.Doors;
+﻿using GameLogic.Decorators;
+using GameLogic.Doors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace GameLogic.Models {
         public int? East { get; set; }
         public int? South { get; set; }
         public int? West { get; set; }
-        public List<Door>? Door { get; set; }
+        public IDoor? Door { get; set; }
     }
 }
