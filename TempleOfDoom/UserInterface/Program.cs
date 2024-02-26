@@ -8,8 +8,8 @@ namespace UserInterface {
         static void Main(string[] args) {
             IDataReader reader = new JSONReader();
             DataReaderContext context = new DataReaderContext(reader);
-            string currentLevel = "../../../../Data/Levels/TempleOfDoom_Extended_C_2223.json";
-            RootDTO rootDTO = context.ReadDataFromFile(currentLevel);
+            string levelPath = "../../../../Data/Levels/TempleOfDoom_Extended_C_2223.json";
+            RootDTO rootDTO = context.ReadDataFromFile(levelPath);
 
             Root root = RootFactory.Create(rootDTO);
         }
