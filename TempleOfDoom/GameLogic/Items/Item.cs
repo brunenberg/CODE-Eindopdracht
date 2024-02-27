@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameLogic.Models;
 
 namespace GameLogic.Items {
-    public abstract class Item {
+    public abstract class Item : GameObject {
     }
 }

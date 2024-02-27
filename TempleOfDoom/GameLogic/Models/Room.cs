@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using GameLogic.Entities;
 using GameLogic.Items;
 using GameLogic.Tiles;
@@ -13,8 +9,26 @@ namespace GameLogic.Models {
         public string? Type { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public List<Item>? Items { get; set; }
-        public List<Enemy>? Enemies { get; set; }
-        public List<SpecialFloorTile>? SpecialFloorTiles { get; set; }
+        public Dictionary<(int, int), List<GameObject>> CoordinateObjects { get; set; }
+
+        public Room() {
+            CoordinateObjects = new Dictionary<(int, int), List<GameObject>>();
+        }
+
+        public void AddObject(GameObject obj) {
+            if (CoordinateObjects.ContainsKey((obj.X, obj.Y))) {
+                CoordinateObjects[(obj.X, obj.Y)].Add(obj);
+            } else {
+                CoordinateObjects[(obj.X, obj.Y)] = new List<GameObject> { obj };
+            }
+        }
+
+        public List<GameObject> GetObjectsAt(int x, int y) {
+            if (CoordinateObjects.ContainsKey((x, y))) {
+                return CoordinateObjects[(x, y)];
+            } else {
+                return new List<GameObject>();
+            }
+        }
     }
 }
