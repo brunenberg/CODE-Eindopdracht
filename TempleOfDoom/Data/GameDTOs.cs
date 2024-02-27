@@ -30,6 +30,7 @@ namespace Data {
 
         public ItemDTO[]? items { get; set; }
         public EnemyDTO[]? enemies { get; set; }
+        public SpecialFloorTileDTO[]? specialFloorTiles { get; set; }
     }
 
 
@@ -70,5 +71,11 @@ namespace Data {
         public int minY { get; set; }
         public int maxX { get; set; }
         public int maxY { get; set; }
+    }
+
+    public class SpecialFloorTileDTO {
+        public string? type { get; set; }
+        public int x { get; set; }
+        public int y { get; set; }
     }
 }
