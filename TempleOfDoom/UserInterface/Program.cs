@@ -8,10 +8,12 @@ namespace UserInterface {
         static void Main(string[] args) {
             IDataReader reader = new JSONReader();
             DataReaderContext context = new DataReaderContext(reader);
-            string levelPath = "../../../../Data/Levels/TempleOfDoom.json";
+            string levelPath = "Data/Levels/TempleOfDoom.json";
             RootDTO rootDTO = context.ReadDataFromFile(levelPath);
 
             Root root = RootFactory.Create(rootDTO);
+
+            new GameEngine(root, levelPath).Run();
         }
     }
 }
