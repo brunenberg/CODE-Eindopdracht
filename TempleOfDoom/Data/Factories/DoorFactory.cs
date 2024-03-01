@@ -2,36 +2,23 @@
 
 namespace Data.Factories {
     public static class DoorFactory {
+        private static readonly Dictionary<string, Func<DoorDTO, IDoor, IDoor>> doorDecorators = new Dictionary<string, Func<DoorDTO, IDoor, IDoor>> {
+            { "colored", (dto, door) => new ColoredDoor(door, dto.color) },
+            { "toggle", (dto, door) => new ToggleDoor(door) },
+            { "closing gate", (dto, door) => new ClosingGateDoor(door) },
+            { "open on odd", (dto, door) => new OpenOnOddDoor(door) },
+            { "open on stones in room", (dto, door) => new OpenOnStonesDoor(door, dto.no_of_stones) },
+            { "switched", (dto, door) => new SwitchDoor(door) }
+        };
+
         public static IDoor Create(DoorDTO[] dtos) {
+            IDoor door = new Passage();
 
-            if (dtos.Length == 0) {
-
-            }
-
-            IDoor door = new BasicDoor();
-
-            foreach(DoorDTO dto in dtos) {
-                switch (dto.type) {
-                    case "colored":
-                        door = new ColoredDoor(door, dto.color);
-                        break;
-                    case "toggle":
-                        door = new ToggleDoor(door);
-                        break;
-                    case "closing gate":
-                        door = new ClosingGateDoor(door);
-                        break;
-                    case "open on odd":
-                        door = new OpenOnOddDoor(door);
-                        break;
-                    case "open on stones in room":
-                        door = new OpenOnStonesDoor(door, dto.no_of_stones);
-                        break;
-                    case "switched":
-                        door = new SwitchDoor(door);
-                        break;
-                    default:
-                        throw new ArgumentException($"Unknown item type '{dto.type}'");
+            foreach (DoorDTO dto in dtos) {
+                if (doorDecorators.TryGetValue(dto.type, out Func<DoorDTO, IDoor, IDoor> createDecorator)) {
+                    door = createDecorator(dto, door);
+                } else {
+                    throw new ArgumentException($"Deur van type '{dto.type}' wordt niet herkend");
                 }
             }
 

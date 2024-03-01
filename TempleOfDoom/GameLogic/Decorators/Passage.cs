@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GameLogic.Decorators {
-    public class BasicDoor : IDoor {
+    public class Passage : IDoor {
 
     }
 }

@@ -7,10 +7,13 @@ namespace Data.Factories {
     public static class RoomFactory {
 
         public static Room Create(RoomDTO dto) {
+            int height = dto.height;
+            int width = dto.width;
+
             Room room = new Room {
                 Id = dto.id,
-                Width = dto.width,
-                Height = dto.height
+                Width = width,
+                Height = height
             };
 
             if (dto.items != null) {
@@ -31,6 +34,17 @@ namespace Data.Factories {
                 foreach (SpecialFloorTileDTO specialFloorTileDto in dto.specialFloorTiles) {
                     GameObject specialFloorTile = SpecialFloorTileFactory.Create(specialFloorTileDto);
                     room.AddObject(specialFloorTile);
+                }
+            }
+
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    if (y == 0 || y == height - 1 || x == 0 || x == width - 1) {
+                        Wall wall = new Wall();
+                        wall.X = x;
+                        wall.Y = y;
+                        room.AddObject(wall);
+                    }
                 }
             }
 
