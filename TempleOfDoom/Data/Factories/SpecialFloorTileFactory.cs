@@ -1,21 +1,19 @@
-﻿using GameLogic.Items.Traps;
-using GameLogic.Items;
+﻿using GameLogic.Models;
 using GameLogic.Tiles;
-using GameLogic.Models;
-using GameLogic.Decorators;
 
 namespace Data.Factories {
     public static class SpecialFloorTileFactory {
+        private static readonly Dictionary<string, Func<SpecialFloorTileDTO, GameObject>> specialFloorTileCreators = new Dictionary<string, Func<SpecialFloorTileDTO, GameObject>> {
+            { "wall", dto => new Wall() },
+            // TODO: Implement innerdoor
+            { "innerdoor", dto => new Wall() }
+        };
+
         public static GameObject Create(SpecialFloorTileDTO dto) {
-            switch (dto.type) {
-                case "wall":
-                    Wall wall = new Wall();
-                    return wall;
-                case "innerdoor": //TODO: Implement innerdoor
-                    Wall wall1 = new Wall();
-                    return wall1;
-                default:
-                    throw new ArgumentException("Unknown item type" + dto.type);
+            if (specialFloorTileCreators.TryGetValue(dto.type, out Func<SpecialFloorTileDTO, GameObject> createSpecialFloorTile)) {
+                return createSpecialFloorTile(dto);
+            } else {
+                throw new ArgumentException("Unknown item type" + dto.type);
             }
         }
     }
