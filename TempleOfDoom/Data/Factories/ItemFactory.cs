@@ -15,7 +15,7 @@ namespace Data.Factories {
             if (itemCreators.TryGetValue(dto.type, out Func<ItemDTO, Item> createItem)) {
                 return createItem(dto);
             } else {
-                throw new ArgumentException("Unknown item type" + dto.type);
+                throw new ArgumentException($"Item van type '{dto.type}' wordt niet herkend");
             }
         }
     }

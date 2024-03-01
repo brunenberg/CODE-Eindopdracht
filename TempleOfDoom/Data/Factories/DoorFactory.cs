@@ -12,18 +12,13 @@ namespace Data.Factories {
         };
 
         public static IDoor Create(DoorDTO[] dtos) {
-            if (dtos.Length == 0) {
-                //TODO: IMPLEMENT
-                //return een connection zonder door?? 
-            }
-
-            IDoor door = new BasicDoor();
+            IDoor door = new Passage();
 
             foreach (DoorDTO dto in dtos) {
                 if (doorDecorators.TryGetValue(dto.type, out Func<DoorDTO, IDoor, IDoor> createDecorator)) {
                     door = createDecorator(dto, door);
                 } else {
-                    throw new ArgumentException($"Unknown item type '{dto.type}'");
+                    throw new ArgumentException($"Deur van type '{dto.type}' wordt niet herkend");
                 }
             }
 
