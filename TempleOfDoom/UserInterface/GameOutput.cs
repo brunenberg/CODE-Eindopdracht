@@ -26,7 +26,6 @@ namespace UserInterface {
             Console.WriteLine("--------------------------------------------------------------------");
             Console.WriteLine("--------------------------------------------------------------------");
         }
-
         public void DrawRoom() {
             Room room = Root.Rooms.Find(r => r.Id == Root.Player.CurrentRoomId);
             for (int y = 0; y < room.Height; y++) {
