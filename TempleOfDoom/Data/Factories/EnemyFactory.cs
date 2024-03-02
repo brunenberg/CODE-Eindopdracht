@@ -10,7 +10,8 @@ namespace Data.Factories {
                 MinX = dto.minX,
                 MinY = dto.minY,
                 MaxX = dto.maxX,
-                MaxY = dto.maxY
+                MaxY = dto.maxY,
+                Lives = 3
             };
             return enemy;
         }
