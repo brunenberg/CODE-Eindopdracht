@@ -2,13 +2,10 @@
 using GameLogic.Observers;
 
 namespace GameLogic.Entities {
-    public class Player : IObservable<Player> {
+    public class Player : Entity, IObservable<Player> {
         private readonly List<IObserver<Player>> observers;
 
-        public int StartRoomId { get; set; }
-        public int StartX { get; set; }
-        public int StartY { get; set; }
-        public int Lives { get; set; }
+        public int CurrentRoomId { get; set; }
         public List<GameObject> Inventory { get; set; }
 
         public Player() {

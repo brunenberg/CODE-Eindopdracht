@@ -1,7 +1,8 @@
 ﻿
-namespace GameLogic.Entities {
-    public abstract class Entity {
-        public int Health { get; protected set; }
+using GameLogic.Models;
 
+namespace GameLogic.Entities {
+    public abstract class Entity : GameObject {
+        public int Lives { get; set; }
     }
 }
