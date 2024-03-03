@@ -10,18 +10,21 @@ using GameLogic.Models;
 namespace Data.Factories {
     public static class RootFactory {
         public static Root Create(RootDTO dto) {
-            Root root = new Root {
-                Rooms = CreateRooms(dto),
-                Connections = CreateConnections(dto),
-                Player = CreatePlayer(dto)
-        };
-            return root;
-        }
+            List<Connection> connections = CreateConnections(dto);
+            List<Room> rooms = CreateRooms(dto, connections);
+            Player player = CreatePlayer(dto);
 
-        private static List<Room> CreateRooms(RootDTO dto) {
+            return new Root {
+                Rooms = rooms,
+                Connections = connections,
+                Player = player
+            };
+        }
+        private static List<Room> CreateRooms(RootDTO dto, List<Connection> connections) {
             List<Room> rooms = new List<Room>();
-            foreach(RoomDTO roomDTO in dto.rooms) {
-                Room room = RoomFactory.Create(roomDTO);
+            foreach (RoomDTO roomDTO in dto.rooms) {
+                List<Connection> roomConnections = connections.Where(c => c.North == roomDTO.id || c.South == roomDTO.id || c.West == roomDTO.id || c.East == roomDTO.id).ToList();
+                Room room = RoomFactory.Create(roomDTO, roomConnections);
                 rooms.Add(room);
             }
             return rooms;

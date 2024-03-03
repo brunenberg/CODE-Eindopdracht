@@ -1,7 +1,7 @@
 ﻿using GameLogic.Decorators;
 
 namespace GameLogic.Models {
-    public class Connection {
+    public class Connection : GameObject {
         public int? North { get; set; }
         public int? East { get; set; }
         public int? South { get; set; }

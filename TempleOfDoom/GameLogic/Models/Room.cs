@@ -23,6 +23,14 @@ namespace GameLogic.Models {
             }
         }
 
+        public void AddObjectOnLocation(GameObject obj, int x, int y) {
+            if (CoordinateObjects.ContainsKey((x, y))) {
+                CoordinateObjects[(x, y)].Add(obj);
+            } else {
+                CoordinateObjects[(x, y)] = new List<GameObject> { obj };
+            }
+        }
+
         public List<GameObject> GetObjectsAt(int x, int y) {
             if (CoordinateObjects.ContainsKey((x, y))) {
                 return CoordinateObjects[(x, y)];
