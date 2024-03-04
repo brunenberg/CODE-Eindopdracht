@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GameLogic.Decorators;
+﻿
 using GameLogic.Entities;
 using GameLogic.Items;
 using GameLogic.Models;
@@ -9,7 +7,7 @@ using GameLogic.Tiles;
 namespace UserInterface.Views {
     public static class MainView {
         private static Dictionary<Type, Func<GameObject, DisplayInfo>> viewMap = new Dictionary<Type, Func<GameObject, DisplayInfo>> {
-            { typeof(Passage), obj => DoorView.GetDisplayInfo(obj) },
+            { typeof(Connection), obj => ConnectionView.GetDisplayInfo(obj) },
             { typeof(Item), obj => ItemView.GetDisplayInfo(obj) },
             { typeof(Entity), obj => EntityView.GetDisplayInfo(obj) },
             { typeof(Wall), obj => WallView.GetDisplayInfo(obj) }

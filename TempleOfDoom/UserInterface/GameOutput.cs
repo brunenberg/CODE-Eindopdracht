@@ -1,5 +1,4 @@
-﻿using GameLogic.Entities;
-using GameLogic.Models;
+﻿using GameLogic.Models;
 using UserInterface.Observers;
 
 namespace UserInterface {

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace GameLogic.Decorators {
     public class ToggleDoor : DoorDecorator {
-        public ToggleDoor(IDoor door) : base(door) {
+        public bool IsOpen { get; set; }
+        public ToggleDoor(IDoor door, bool isOpen) : base(door) {
+            IsOpen = isOpen;
         }
     }
 }
