@@ -1,5 +1,4 @@
-﻿using GameLogic.Entities;
-using GameLogic.Models;
+﻿using GameLogic.Models;
 using UserInterface.Observers;
 
 namespace UserInterface {
@@ -27,7 +26,7 @@ namespace UserInterface {
             Console.WriteLine("--------------------------------------------------------------------");
         }
         public void DrawRoom() {
-            Room room = Root.Rooms.Find(r => r.Id == 9);
+            Room room = Root.Rooms.Find(r => r.Id == Root.Player.CurrentRoomId);
             for (int y = 0; y < room.Height; y++) {
                 for (int x = 0; x < room.Width; x++) {
                     List<GameObject> objects = room.GetObjectsAt(x, y);
