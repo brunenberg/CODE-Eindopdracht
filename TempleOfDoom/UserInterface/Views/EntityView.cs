@@ -1,4 +1,4 @@
-﻿using GameLogic.Decorators;
+﻿using Data.Factories;
 using GameLogic.Entities;
 using GameLogic.Models;
 
@@ -10,7 +10,12 @@ namespace UserInterface.Views {
         };
 
         public static DisplayInfo GetDisplayInfo(GameObject entity) {
-            if (characterMap.TryGetValue(entity.GetType(), out var characterColor)) {
+            Type entityType = entity.GetType();
+            if (entityType == typeof(HorizontalEnemy) || entityType == typeof(VerticalEnemy)) {
+                entityType = typeof(Enemy);
+            }
+
+            if (characterMap.TryGetValue(entityType, out var characterColor)) {
                 return new DisplayInfo(characterColor.Item1, characterColor.Item2);
             }
             throw new ArgumentException($"Entity of type '{entity.GetType()}' is not recognized");

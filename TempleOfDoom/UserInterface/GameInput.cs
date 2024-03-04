@@ -32,11 +32,7 @@ namespace UserInterface {
 
         private void HandleKeyPress(ConsoleKeyInfo keyInfo) {
             if (keyToDirectionMap.TryGetValue(keyInfo.Key, out Direction direction)) {
-                /*bool isValidMove = Game.Player.Move(direction);
-                if (isValidMove) {
-                    GameOutput.ClearScreen();
-                    GameOutput.DisplayGameState();
-                }*/
+                Root.Player.Move(Root, direction);
             }
         }
     }

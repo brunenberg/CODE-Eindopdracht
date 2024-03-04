@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using GameLogic.Entities;
+﻿using GameLogic.Entities;
 using GameLogic.Models;
 
 namespace Data.Factories {
     public static class RootFactory {
         public static Root Create(RootDTO dto) {
-            List<Connection> connections = CreateConnections(dto);
-            List<Room> rooms = CreateRooms(dto, connections);
             Player player = CreatePlayer(dto);
+            List<Connection> connections = CreateConnections(dto);
+            List<Room> rooms = CreateRooms(dto, connections, player);
 
             return new Root {
                 Rooms = rooms,
@@ -20,11 +14,11 @@ namespace Data.Factories {
                 Player = player
             };
         }
-        private static List<Room> CreateRooms(RootDTO dto, List<Connection> connections) {
+        private static List<Room> CreateRooms(RootDTO dto, List<Connection> connections, Player player) {
             List<Room> rooms = new List<Room>();
             foreach (RoomDTO roomDTO in dto.rooms) {
                 List<Connection> roomConnections = connections.Where(c => c.North == roomDTO.id || c.South == roomDTO.id || c.West == roomDTO.id || c.East == roomDTO.id).ToList();
-                Room room = RoomFactory.Create(roomDTO, roomConnections);
+                Room room = RoomFactory.Create(roomDTO, roomConnections, player);
                 rooms.Add(room);
             }
             return rooms;

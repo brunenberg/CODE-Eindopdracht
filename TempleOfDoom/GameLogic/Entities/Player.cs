@@ -4,8 +4,6 @@ using GameLogic.Observers;
 namespace GameLogic.Entities {
     public class Player : Entity, IObservable<Player> {
         private readonly List<IObserver<Player>> observers;
-
-        public int CurrentRoomId { get; set; }
         public List<GameObject> Inventory { get; set; }
 
         public Player() {
