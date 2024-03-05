@@ -11,4 +11,10 @@
     <ProjectReference Include="..\GameLogic\GameLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="CODE_TempleOfDoom_DownloadableContent">
+      <HintPath>..\Libs\CODE_TempleOfDoom_DownloadableContent.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
