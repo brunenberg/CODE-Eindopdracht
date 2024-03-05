@@ -1,4 +1,4 @@
-﻿using GameLogic.Entities;
+using GameLogic.Entities;
 using GameLogic.Items;
 using GameLogic.Models;
 using GameLogic.Tiles;
