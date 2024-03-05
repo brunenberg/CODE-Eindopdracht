@@ -17,6 +17,8 @@ namespace UserInterface {
             GameOutput.DisplayGameState();
             while (true) {
                 GameInput.ProcessInput();
+                Console.Clear();
+                GameOutput.DisplayGameState();
 
                 // if (gameIsOver) {
                 //     break;

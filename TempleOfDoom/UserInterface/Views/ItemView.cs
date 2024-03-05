@@ -9,7 +9,7 @@ namespace UserInterface.Views {
             { typeof(Key), ('K', null) },
             { typeof(BoobyTrap), ('O', null) },
             { typeof(DisappearingBoobyTrap), ('@', null) },
-            { typeof(PressurePlate), ('T', null) }
+            { typeof(PressurePlate), ('P', null) }
         };
 
         public static DisplayInfo GetDisplayInfo(GameObject item) {

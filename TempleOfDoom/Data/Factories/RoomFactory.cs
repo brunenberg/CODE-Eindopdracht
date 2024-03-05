@@ -1,11 +1,12 @@
-﻿using GameLogic.Items;
+using GameLogic.Entities;
+using GameLogic.Items;
 using GameLogic.Models;
 using GameLogic.Tiles;
 
 namespace Data.Factories {
     public static class RoomFactory {
 
-        public static Room Create(RoomDTO dto, List<Connection> connections) {
+        public static Room Create(RoomDTO dto, List<Connection> connections, Player player = null) {
             int height = dto.height;
             int width = dto.width;
 
@@ -29,11 +30,8 @@ namespace Data.Factories {
                 }
             }
 
-            if (dto.specialFloorTiles != null) {
-                foreach (SpecialFloorTileDTO specialFloorTileDto in dto.specialFloorTiles) {
-                    GameObject specialFloorTile = SpecialFloorTileFactory.Create(specialFloorTileDto);
-                    room.AddObject(specialFloorTile);
-                }
+            if (player != null && room.Id == player.CurrentRoomId) {
+                room.AddObject(player);
             }
 
             for (int y = 0; y < height; y++) {

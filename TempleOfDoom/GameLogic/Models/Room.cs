@@ -33,5 +33,23 @@
                 return new List<GameObject>();
             }
         }
+
+        public void MoveObject(GameObject obj, int newX, int newY) {
+            if (CoordinateObjects.ContainsKey((obj.X, obj.Y)) && CoordinateObjects[(obj.X, obj.Y)].Contains(obj)) {
+                CoordinateObjects[(obj.X, obj.Y)].Remove(obj);
+
+                if (CoordinateObjects[(obj.X, obj.Y)].Count == 0) {
+                    CoordinateObjects.Remove((obj.X, obj.Y));
+                }
+
+                obj.X = newX;
+                obj.Y = newY;
+
+                AddObject(obj);
+            } else {
+                throw new Exception("Object not found at the specified location.");
+            }
+        }
+
     }
 }
