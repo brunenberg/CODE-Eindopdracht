@@ -1,12 +1,11 @@
-﻿using GameLogic.Decorators;
-using GameLogic.Entities;
+﻿using GameLogic.Entities;
 using GameLogic.Models;
 
 namespace UserInterface.Views {
     public static class EntityView {
         private static Dictionary<Type, (char, ConsoleColor?)> characterMap = new Dictionary<Type, (char, ConsoleColor?)> {
             { typeof(Player), ('X', ConsoleColor.White) },
-            { typeof(Enemy), ('E', ConsoleColor.Blue) }
+            { typeof(EnemyAdapter), ('E', ConsoleColor.Blue) }
         };
 
         public static DisplayInfo GetDisplayInfo(GameObject entity) {
