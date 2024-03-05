@@ -14,7 +14,7 @@ namespace UserInterface.Views {
         };
 
         public static GameObject? GetPriorityObject(List<GameObject> objects) {
-            List<Type> priorityList = new List<Type> { typeof(Player), typeof(Enemy) };
+            List<Type> priorityList = new List<Type> { typeof(Player), typeof(EnemyAdapter) };
 
             objects.Sort((a, b) => {
                 int indexA = priorityList.IndexOf(a.GetType());
@@ -42,6 +42,7 @@ namespace UserInterface.Views {
             }
             throw new ArgumentException($"Object of type '{obj.GetType()}' is not recognized");
         }
+
         private static ConsoleColor? GetObjectColor(GameObject obj, ConsoleColor? defaultColor) {
             var colorProperty = obj.GetType().GetProperty("Color");
             if (colorProperty != null) {

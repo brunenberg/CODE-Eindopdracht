@@ -1,5 +1,4 @@
-﻿using GameLogic.Entities;
-using GameLogic.Items;
+﻿using GameLogic.Items;
 using GameLogic.Models;
 using GameLogic.Tiles;
 
@@ -25,7 +24,7 @@ namespace Data.Factories {
 
             if (dto.enemies != null) {
                 foreach (EnemyDTO enemyDto in dto.enemies) {
-                    Enemy enemy = EnemyFactory.Create(enemyDto, dto.id);
+                    EnemyAdapter enemy = EnemyFactory.Create(enemyDto);
                     room.AddObject(enemy);
                 }
             }

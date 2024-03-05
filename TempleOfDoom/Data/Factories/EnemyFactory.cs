@@ -1,31 +1,25 @@
-﻿using GameLogic.Entities;
+﻿using CODE_TempleOfDoom_DownloadableContent;
 
 namespace Data.Factories {
     public static class EnemyFactory {
-        public static Enemy Create(EnemyDTO dto, int id) {
+        public static EnemyAdapter Create(EnemyDTO dto) {
             Enemy enemy;
+            int lives = 3;
+
             switch (dto.type) {
                 case "horizontal":
-                    enemy = new HorizontalEnemy();
+                    enemy = new HorizontallyMovingEnemy(lives, dto.x, dto.y, dto.minX, dto.maxY);
                     break;
                 case "vertical":
-                    enemy = new VerticalEnemy();
+                    enemy = new VerticallyMovingEnemy(lives, dto.x, dto.y, dto.minX, dto.maxY);
                     break;
                 default:
-                    enemy = new Enemy();
-                    break;
+                    throw new ArgumentException($"Invalid enemy type: {dto.type}");
             }
-            enemy.CurrentRoomId = id;
-            enemy.Type = dto.type;
-            enemy.X = dto.x;
-            enemy.Y = dto.y;
-            enemy.MinX = dto.minX;
-            enemy.MinY = dto.minY;
-            enemy.MaxX = dto.maxX;
-            enemy.MaxY = dto.maxY;
-            enemy.Lives = 3;
 
-            return enemy;
+            EnemyAdapter enemyAdapter = new EnemyAdapter(enemy);
+
+            return enemyAdapter;
         }
     }
 }
