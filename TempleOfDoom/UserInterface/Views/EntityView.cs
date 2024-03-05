@@ -11,9 +11,6 @@ namespace UserInterface.Views {
 
         public static DisplayInfo GetDisplayInfo(GameObject entity) {
             Type entityType = entity.GetType();
-            if (entityType == typeof(HorizontalEnemy) || entityType == typeof(VerticalEnemy)) {
-                entityType = typeof(Enemy);
-            }
 
             if (characterMap.TryGetValue(entityType, out var characterColor)) {
                 return new DisplayInfo(characterColor.Item1, characterColor.Item2);
