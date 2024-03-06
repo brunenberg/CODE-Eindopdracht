@@ -38,7 +38,7 @@ namespace UserInterface {
         }
 
         private bool HandleKeyPress(ConsoleKeyInfo keyInfo) {
-            bool newGameTick = false;
+            bool shouldUpdateGameState = false;
             if (keyToActionMap.TryGetValue(keyInfo.Key, out Action action)) {
                 switch (action) {
                     case Action.MOVE_NORTH:
@@ -46,11 +46,11 @@ namespace UserInterface {
                     case Action.MOVE_EAST:
                     case Action.MOVE_WEST:
                         Direction direction = (Direction)Enum.Parse(typeof(Direction), action.ToString().Split('_')[1]);
-                        newGameTick = Root.Player.Move(Root, direction);
+                        shouldUpdateGameState = Root.Player.Move(Root, direction);
                         break;
                 }
             }
-            return newGameTick;
+            return shouldUpdateGameState;
         }
     }
 }
