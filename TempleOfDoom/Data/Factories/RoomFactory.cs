@@ -32,6 +32,7 @@ namespace Data.Factories {
 
             if (player != null && room.Id == player.CurrentRoomId) {
                 room.AddObject(player);
+                player.CurrentRoom = room;
             }
 
             for (int y = 0; y < height; y++) {
