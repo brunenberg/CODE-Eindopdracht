@@ -28,16 +28,17 @@ namespace UserInterface {
             this.GameOutput = gameOutput;
         }
 
-        public void ProcessInput() {
+        public bool ProcessInput() {
             ConsoleKeyInfo keyInfo = GetKeyPress();
-            HandleKeyPress(keyInfo);
+            return HandleKeyPress(keyInfo);
         }
 
         private ConsoleKeyInfo GetKeyPress() {
             return Console.ReadKey(intercept: true);
         }
 
-        private void HandleKeyPress(ConsoleKeyInfo keyInfo) {
+        private bool HandleKeyPress(ConsoleKeyInfo keyInfo) {
+            bool newGameTick = false;
             if (keyToActionMap.TryGetValue(keyInfo.Key, out Action action)) {
                 switch (action) {
                     case Action.MOVE_NORTH:
@@ -45,10 +46,11 @@ namespace UserInterface {
                     case Action.MOVE_EAST:
                     case Action.MOVE_WEST:
                         Direction direction = (Direction)Enum.Parse(typeof(Direction), action.ToString().Split('_')[1]);
-                        Root.Player.Move(Root, direction);
+                        newGameTick = Root.Player.Move(Root, direction);
                         break;
                 }
             }
+            return newGameTick;
         }
     }
 }
