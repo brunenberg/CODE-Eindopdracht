@@ -68,7 +68,5 @@ namespace GameLogic.Models {
                 entity.InteractWithCurrentLocation(root, entity);
             }
         }
-
-
     }
 }

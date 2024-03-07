@@ -53,7 +53,9 @@ namespace GameLogic.Models {
                     CoordinateObjects.Remove((obj.X, obj.Y));
                 }
 
-                UpdateObjectCoordinates(obj, newX, newY);
+                obj.X = newX;
+                obj.Y = newY;
+
                 AddObject(obj);
             } else {
                 throw new Exception("Object not found at the specified location.");
@@ -71,11 +73,5 @@ namespace GameLogic.Models {
                 throw new Exception("Object not found at the specified location.");
             }
         }
-
-        public void UpdateObjectCoordinates(GameObject obj, int newX, int newY) {
-            obj.X = newX;
-            obj.Y = newY;
-        }
-
     }
 }
