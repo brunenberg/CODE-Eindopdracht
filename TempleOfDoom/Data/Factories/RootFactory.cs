@@ -14,16 +14,9 @@ namespace Data.Factories {
                 Player = player
             };
         }
-        private static List<Room> CreateRooms(RootDTO dto, List<Connection> connections, Player player) {
-            List<Room> rooms = new List<Room>();
-            foreach (RoomDTO roomDTO in dto.rooms) {
-                List<Connection> roomConnections = connections.Where(c => c.North == roomDTO.id || c.South == roomDTO.id || c.West == roomDTO.id || c.East == roomDTO.id).ToList();
-                Room room = RoomFactory.Create(roomDTO, roomConnections, player);
-                rooms.Add(room);
-            }
-            return rooms;
+        private static Player CreatePlayer(RootDTO dto) {
+            return PlayerFactory.Create(dto.player);
         }
-
         private static List<Connection> CreateConnections(RootDTO dto) {
             List<Connection> connections = new List<Connection>();
             foreach (ConnectionDTO connectionDTO in dto.connections) {
@@ -33,8 +26,14 @@ namespace Data.Factories {
             return connections;
         }
 
-        private static Player CreatePlayer(RootDTO dto) {
-            return PlayerFactory.Create(dto.player);
+        private static List<Room> CreateRooms(RootDTO dto, List<Connection> connections, Player player) {
+            List<Room> rooms = new List<Room>();
+            foreach (RoomDTO roomDTO in dto.rooms) {
+                List<Connection> roomConnections = connections.Where(c => c.North == roomDTO.id || c.South == roomDTO.id || c.West == roomDTO.id || c.East == roomDTO.id).ToList();
+                Room room = RoomFactory.Create(roomDTO, roomConnections, player, dto.player.startRoomId);
+                rooms.Add(room);
+            }
+            return rooms;
         }
     }
 }

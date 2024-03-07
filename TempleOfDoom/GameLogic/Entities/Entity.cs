@@ -4,7 +4,6 @@ using GameLogic.Models;
 
 namespace GameLogic.Entities {
     public abstract class Entity : GameObject {
-        public int CurrentRoomId { get; set; }
         public Room CurrentRoom { get; set; }
         public int Lives { get; set; }
         public Direction LastMovedDirection { get; set; }

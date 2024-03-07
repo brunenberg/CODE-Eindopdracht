@@ -6,7 +6,7 @@ using GameLogic.Tiles;
 namespace Data.Factories {
     public static class RoomFactory {
 
-        public static Room Create(RoomDTO dto, List<Connection> connections, Player player = null) {
+        public static Room Create(RoomDTO dto, List<Connection> connections, Player player, int startRoomId) {
             int height = dto.height;
             int width = dto.width;
 
@@ -30,7 +30,7 @@ namespace Data.Factories {
                 }
             }
 
-            if (player != null && room.Id == player.CurrentRoomId) {
+            if (player != null && room.Id == startRoomId) {
                 room.AddObject(player);
                 player.CurrentRoom = room;
             }
