@@ -33,7 +33,9 @@ namespace GameLogic.Entities {
         }
 
         public void InteractWithCurrentLocation() {
+            foreach (GameObject obj in CurrentRoom.GetNonEntityObjectsAt(this, X, Y)) {
 
+            }
         }
     }
 }

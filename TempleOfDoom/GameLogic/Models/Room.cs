@@ -1,4 +1,6 @@
-﻿namespace GameLogic.Models {
+﻿using GameLogic.Entities;
+
+namespace GameLogic.Models {
     public class Room {
         public int Id { get; set; }
         public string? Type { get; set; }
@@ -32,6 +34,14 @@
             } else {
                 return new List<GameObject>();
             }
+        }
+
+        public List<GameObject> GetNonEntityObjectsAt(Entity entity, int x, int y) {
+            List<GameObject> objectsAtCoordinates = GetObjectsAt(x, y);
+            if (objectsAtCoordinates.Contains(entity)) {
+                objectsAtCoordinates.Remove(entity);
+            }
+            return objectsAtCoordinates;
         }
 
         public void MoveObject(GameObject obj, int newX, int newY) {

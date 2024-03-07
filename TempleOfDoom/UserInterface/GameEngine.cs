@@ -16,7 +16,9 @@ namespace UserInterface {
         public void Run() {
             GameOutput.DisplayGameState();
             while (true) {
-                if (GameInput.ProcessInput()) {
+                bool shouldUpdateGameState = GameInput.ProcessInput();
+                if (shouldUpdateGameState) {
+                    Root.Player.InteractWithCurrentLocation();
                     Console.Clear();
                     GameOutput.DisplayGameState();
                 }
