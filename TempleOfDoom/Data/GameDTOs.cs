@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Data {
+﻿namespace Data {
 
     public class RootDTO {
         public RoomDTO[]? rooms { get; set; }
@@ -64,7 +58,7 @@ namespace Data {
     }
 
     public class EnemyDTO {
-        public string ?type { get; set; }
+        public string? type { get; set; }
         public int x { get; set; }
         public int y { get; set; }
         public int minX { get; set; }

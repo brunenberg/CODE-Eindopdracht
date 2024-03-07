@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameLogic.Entities;
+using GameLogic.Interfaces;
+using GameLogic.Models;
 
 namespace GameLogic.Decorators {
-    public class SwitchDoor : DoorDecorator {
+    public class SwitchDoor : DoorDecorator, IEnterable {
         public SwitchDoor(IDoor door) : base(door) {
+        }
+
+        public bool CanEntityEnter(Root root, Entity entity) {
+            return true;
+        }
+
+        public void OnEnter(Root root, Entity entity) {
+            // Nothing
         }
     }
 }
