@@ -36,13 +36,14 @@ namespace GameLogic.Models {
             }
         }
 
-        public List<GameObject> GetNonEntityObjectsAt(Entity entity, int x, int y) {
-            List<GameObject> objectsAtCoordinates = GetObjectsAt(x, y);
+        public List<GameObject> GetNonEntityObjectsForEntity(Entity entity) {
+            List<GameObject> objectsAtCoordinates = new List<GameObject>(GetObjectsAt(entity.X, entity.Y));
             if (objectsAtCoordinates.Contains(entity)) {
                 objectsAtCoordinates.Remove(entity);
             }
             return objectsAtCoordinates;
         }
+
 
         public void MoveObject(GameObject obj, int newX, int newY) {
             if (CoordinateObjects.ContainsKey((obj.X, obj.Y)) && CoordinateObjects[(obj.X, obj.Y)].Contains(obj)) {
@@ -52,13 +53,28 @@ namespace GameLogic.Models {
                     CoordinateObjects.Remove((obj.X, obj.Y));
                 }
 
-                obj.X = newX;
-                obj.Y = newY;
-
+                UpdateObjectCoordinates(obj, newX, newY);
                 AddObject(obj);
             } else {
                 throw new Exception("Object not found at the specified location.");
             }
+        }
+
+        public void RemoveObject(GameObject obj) {
+            if (CoordinateObjects.ContainsKey((obj.X, obj.Y)) && CoordinateObjects[(obj.X, obj.Y)].Contains(obj)) {
+                CoordinateObjects[(obj.X, obj.Y)].Remove(obj);
+
+                if (CoordinateObjects[(obj.X, obj.Y)].Count == 0) {
+                    CoordinateObjects.Remove((obj.X, obj.Y));
+                }
+            } else {
+                throw new Exception("Object not found at the specified location.");
+            }
+        }
+
+        public void UpdateObjectCoordinates(GameObject obj, int newX, int newY) {
+            obj.X = newX;
+            obj.Y = newY;
         }
 
     }
