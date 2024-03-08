@@ -2,8 +2,8 @@
 using GameLogic.Items.Traps;
 
 namespace Data.Factories {
-    public static class ItemFactory {
-        private static readonly Dictionary<string, Func<ItemDTO, Item>> itemCreators = new Dictionary<string, Func<ItemDTO, Item>> {
+    public class ItemFactory {
+        private readonly Dictionary<string, Func<ItemDTO, Item>> itemCreators = new Dictionary<string, Func<ItemDTO, Item>> {
             { "sankara stone", dto => new SankaraStone { X = dto.x, Y = dto.y } },
             { "key", dto => new Key { Color = dto.color, X = dto.x, Y = dto.y } },
             { "boobytrap", dto => new BoobyTrap { Damage = dto.damage, X = dto.x, Y = dto.y } },
@@ -11,7 +11,7 @@ namespace Data.Factories {
             { "pressure plate", dto => new PressurePlate { X = dto.x, Y = dto.y } }
         };
 
-        public static Item Create(ItemDTO dto) {
+        public Item Create(ItemDTO dto) {
             if (itemCreators.TryGetValue(dto.type, out Func<ItemDTO, Item> createItem)) {
                 return createItem(dto);
             } else {

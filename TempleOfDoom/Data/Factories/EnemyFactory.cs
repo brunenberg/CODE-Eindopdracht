@@ -1,8 +1,8 @@
 ﻿using CODE_TempleOfDoom_DownloadableContent;
 
 namespace Data.Factories {
-    public static class EnemyFactory {
-        public static EnemyAdapter Create(EnemyDTO dto) {
+    public class EnemyFactory {
+        public EnemyAdapter Create(EnemyDTO dto) {
             Enemy enemy;
             int lives = 3;
 
