@@ -4,9 +4,16 @@ using GameLogic.Models;
 using GameLogic.Tiles;
 
 namespace Data.Factories {
-    public static class RoomFactory {
+    public class RoomFactory {
+        private ItemFactory _itemFactory;
+        private EnemyFactory _enemyFactory;
 
-        public static Room Create(RoomDTO dto, List<Connection> connections, Player player, int startRoomId) {
+        public RoomFactory() {
+            _itemFactory = new ItemFactory();
+            _enemyFactory = new EnemyFactory();
+        }
+
+        public Room Create(RoomDTO dto, List<Connection> connections, Player player, int startRoomId) {
             int height = dto.height;
             int width = dto.width;
 
@@ -18,14 +25,14 @@ namespace Data.Factories {
 
             if (dto.items != null) {
                 foreach (ItemDTO itemDto in dto.items) {
-                    Item item = ItemFactory.Create(itemDto);
+                    Item item = _itemFactory.Create(itemDto);
                     room.AddObject(item);
                 }
             }
 
             if (dto.enemies != null) {
                 foreach (EnemyDTO enemyDto in dto.enemies) {
-                    EnemyAdapter enemy = EnemyFactory.Create(enemyDto);
+                    EnemyAdapter enemy = _enemyFactory.Create(enemyDto);
                     room.AddObject(enemy);
                 }
             }
@@ -61,23 +68,20 @@ namespace Data.Factories {
             return room;
         }
 
-        private static bool IsConnectionLocation(int x, int y, Room room, Connection connection) {
+        private bool IsConnectionLocation(int x, int y, Room room, Connection connection) {
             int middleY = room.Height / 2;
             int middleX = room.Width / 2;
 
-            if (connection.North == room.Id && y == room.Height - 1 && x == middleX) {
-                return true;
-            } else if (connection.South == room.Id && y == 0 && x == middleX) {
+            if ((connection.North == room.Id || connection.South == room.Id) && y == (connection.North == room.Id ? room.Height - 1 : 0) && x == middleX) {
                 return true;
             }
 
-            if (connection.East == room.Id && x == 0 && y == middleY) {
-                return true;
-            } else if (connection.West == room.Id && x == room.Width - 1 && y == middleY) {
+            if ((connection.East == room.Id || connection.West == room.Id) && x == (connection.East == room.Id ? 0 : room.Width - 1) && y == middleY) {
                 return true;
             }
 
             return false;
         }
+
     }
 }

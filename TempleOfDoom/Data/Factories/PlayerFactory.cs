@@ -1,8 +1,8 @@
 ﻿using GameLogic.Entities;
 
 namespace Data.Factories {
-    public static class PlayerFactory {
-        public static Player Create(PlayerDTO dto) {
+    public class PlayerFactory {
+        public Player Create(PlayerDTO dto) {
             return new Player {
                 X = dto.startX,
                 Y = dto.startY,
