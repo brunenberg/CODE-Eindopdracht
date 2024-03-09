@@ -20,7 +20,7 @@ namespace Data.Factories {
                 }
                 return item;
             } else {
-                throw new ArgumentException($"Item van type '{dto.type}' wordt niet herkend");
+                throw new ArgumentException($"Item of type '{dto.type}' is not recognized");
             }
         }
 

@@ -226,10 +226,10 @@
       "SOUTH": 8,
       "doors": [
         {
-          "type": "toggle"
+          "type": "open on odd"
         },
         {
-          "type": "open on odd"
+          "type": "toggle"
         }
       ]
     },

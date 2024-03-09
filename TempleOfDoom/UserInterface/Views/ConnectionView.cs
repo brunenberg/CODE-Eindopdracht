@@ -17,6 +17,8 @@ namespace UserInterface.Views {
                     } else if (door is SwitchDoor) {
                         character = '~';
                         color = ConsoleColor.DarkMagenta;
+                    } else if (door is ToggleDoor) {
+                        character = 'T';
                     } else if (door is Passage) {
                         if (isDecorator) {
                             break;

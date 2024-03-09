@@ -14,7 +14,7 @@ namespace Data.Factories {
                     enemy = new VerticallyMovingEnemy(lives, dto.x, dto.y, dto.minX, dto.maxY);
                     break;
                 default:
-                    throw new ArgumentException($"Invalid enemy type: {dto.type}");
+                    throw new ArgumentException($"Enemy of type '{dto.type}' is not recognized");
             }
 
             EnemyAdapter enemyAdapter = new EnemyAdapter(enemy);

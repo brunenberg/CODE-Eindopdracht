@@ -18,7 +18,7 @@ namespace Data.Factories {
                 if (doorDecorators.TryGetValue(dto.type, out Func<DoorDTO, IDoor, IDoor> createDecorator)) {
                     door = createDecorator(dto, door);
                 } else {
-                    throw new ArgumentException($"Deur van type '{dto.type}' wordt niet herkend");
+                    throw new ArgumentException($"Door of type '{dto.type}' is not recognized");
                 }
             }
 
