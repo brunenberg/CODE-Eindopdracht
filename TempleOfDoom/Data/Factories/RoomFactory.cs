@@ -25,7 +25,7 @@ namespace Data.Factories {
 
             if (dto.items != null) {
                 foreach (ItemDTO itemDto in dto.items) {
-                    Item item = _itemFactory.Create(itemDto);
+                    Item item = _itemFactory.Create(itemDto, room);
                     room.AddObject(item);
                 }
             }

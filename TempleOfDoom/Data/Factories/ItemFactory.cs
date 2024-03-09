@@ -1,5 +1,6 @@
 ﻿using GameLogic.Items;
 using GameLogic.Items.Traps;
+using GameLogic.Models;
 
 namespace Data.Factories {
     public class ItemFactory {
@@ -11,12 +12,17 @@ namespace Data.Factories {
             { "pressure plate", dto => new PressurePlate { Type = dto.type, X = dto.x, Y = dto.y } }
         };
 
-        public Item Create(ItemDTO dto) {
+        public Item Create(ItemDTO dto, Room room) {
             if (itemCreators.TryGetValue(dto.type, out Func<ItemDTO, Item> createItem)) {
-                return createItem(dto);
+                Item item = createItem(dto);
+                if (item is SankaraStone) {
+                    room.SankaraStoneAmount++;
+                }
+                return item;
             } else {
                 throw new ArgumentException($"Item van type '{dto.type}' wordt niet herkend");
             }
         }
+
     }
 }

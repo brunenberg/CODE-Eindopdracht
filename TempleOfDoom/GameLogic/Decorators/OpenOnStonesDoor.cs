@@ -12,11 +12,7 @@ namespace GameLogic.Decorators {
         }
 
         public bool CanEntityEnter(Root root, Entity entity) {
-            if (entity is Player player) {
-                int playerStoneAmount = player.Inventory.OfType<SankaraStone>().Count();
-                return playerStoneAmount == NumberOfStones;
-            }
-            return false;
+            return NumberOfStones == entity.CurrentRoom.SankaraStoneAmount;
         }
 
         public void OnEnter(Root root, Entity entity) {
