@@ -1,4 +1,5 @@
 ﻿using GameLogic.Entities;
+using GameLogic.Items;
 
 namespace GameLogic.Models {
     public class Room {
@@ -7,6 +8,7 @@ namespace GameLogic.Models {
         public int Width { get; set; }
         public int Height { get; set; }
         public Dictionary<(int, int), List<GameObject>> CoordinateObjects { get; set; }
+        public int SankaraStoneAmount { get; set; }
 
         public Room() {
             CoordinateObjects = new Dictionary<(int, int), List<GameObject>>();
@@ -66,6 +68,10 @@ namespace GameLogic.Models {
             if (CoordinateObjects.ContainsKey((obj.X, obj.Y)) && CoordinateObjects[(obj.X, obj.Y)].Contains(obj)) {
                 CoordinateObjects[(obj.X, obj.Y)].Remove(obj);
 
+                if (obj is SankaraStone) {
+                    SankaraStoneAmount--;
+                }
+
                 if (CoordinateObjects[(obj.X, obj.Y)].Count == 0) {
                     CoordinateObjects.Remove((obj.X, obj.Y));
                 }
@@ -73,5 +79,6 @@ namespace GameLogic.Models {
                 throw new Exception("Object not found at the specified location.");
             }
         }
+
     }
 }

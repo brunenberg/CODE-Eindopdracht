@@ -13,7 +13,7 @@ namespace Data.Factories {
             if (specialFloorTileCreators.TryGetValue(dto.type, out Func<SpecialFloorTileDTO, GameObject> createSpecialFloorTile)) {
                 return createSpecialFloorTile(dto);
             } else {
-                throw new ArgumentException("Unknown item type" + dto.type);
+                throw new ArgumentException($"Item of type '{dto.type}' is not recognized");
             }
         }
     }

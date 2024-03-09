@@ -1,3 +1,4 @@
+using GameLogic.Decorators;
 using GameLogic.Entities;
 using GameLogic.Items;
 using GameLogic.Models;
@@ -23,10 +24,17 @@ namespace Data.Factories {
                 Height = height
             };
 
+            List<PressurePlate> pressurePlates = new List<PressurePlate>();
+            List<ToggleDoor> toggleDoors = new List<ToggleDoor>();
+
             if (dto.items != null) {
                 foreach (ItemDTO itemDto in dto.items) {
-                    Item item = _itemFactory.Create(itemDto);
+                    Item item = _itemFactory.Create(itemDto, room);
                     room.AddObject(item);
+
+                    if (item is PressurePlate pressurePlate) {
+                        pressurePlates.Add(pressurePlate);
+                    }
                 }
             }
 
@@ -48,7 +56,7 @@ namespace Data.Factories {
                         bool isDoor = false;
                         if (connections != null) {
                             foreach (Connection connection in connections) {
-                                if (IsConnectionLocation(x, y, room, connection)) {
+                                if (IsConnectionLocation(x, y, room, connection, toggleDoors)) {
                                     room.AddObjectOnLocation(connection, x, y);
                                     isDoor = true;
                                     break;
@@ -65,23 +73,37 @@ namespace Data.Factories {
                 }
             }
 
+            foreach (PressurePlate pressurePlate in pressurePlates) {
+                foreach (ToggleDoor toggleDoor in toggleDoors) {
+                    pressurePlate.RegisterObserver(toggleDoor);
+                }
+            }
+
             return room;
         }
 
-        private bool IsConnectionLocation(int x, int y, Room room, Connection connection) {
+        private bool IsConnectionLocation(int x, int y, Room room, Connection connection, List<ToggleDoor> toggleDoors) {
             int middleY = room.Height / 2;
             int middleX = room.Width / 2;
 
             if ((connection.North == room.Id || connection.South == room.Id) && y == (connection.North == room.Id ? room.Height - 1 : 0) && x == middleX) {
+                AddDoorToToggleDoorsList(room, connection, x, y, toggleDoors);
                 return true;
             }
 
             if ((connection.East == room.Id || connection.West == room.Id) && x == (connection.East == room.Id ? 0 : room.Width - 1) && y == middleY) {
+                AddDoorToToggleDoorsList(room, connection, x, y, toggleDoors);
                 return true;
             }
 
             return false;
         }
 
+        private void AddDoorToToggleDoorsList(Room room, Connection connection, int x, int y, List<ToggleDoor> toggleDoors) {
+            IDoor door = connection.Door;
+            if (door is ToggleDoor toggleDoor) {
+                toggleDoors.Add(toggleDoor);
+            }
+        }
     }
 }
