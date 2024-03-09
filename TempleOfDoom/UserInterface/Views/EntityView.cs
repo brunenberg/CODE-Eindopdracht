@@ -2,13 +2,13 @@ using GameLogic.Entities;
 using GameLogic.Models;
 
 namespace UserInterface.Views {
-    public static class EntityView {
-        private static Dictionary<Type, (char, ConsoleColor?)> characterMap = new Dictionary<Type, (char, ConsoleColor?)> {
+    public class EntityView {
+        private readonly Dictionary<Type, (char, ConsoleColor?)> characterMap = new Dictionary<Type, (char, ConsoleColor?)> {
             { typeof(Player), ('X', ConsoleColor.White) },
             { typeof(EnemyAdapter), ('E', ConsoleColor.Blue) }
         };
 
-        public static DisplayInfo GetDisplayInfo(GameObject entity) {
+        public DisplayInfo GetDisplayInfo(GameObject entity) {
             Type entityType = entity.GetType();
 
             if (characterMap.TryGetValue(entityType, out var characterColor)) {

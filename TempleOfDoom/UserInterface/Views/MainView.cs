@@ -5,15 +5,30 @@ using GameLogic.Models;
 using GameLogic.Tiles;
 
 namespace UserInterface.Views {
-    public static class MainView {
-        private static Dictionary<Type, Func<GameObject, DisplayInfo>> viewMap = new Dictionary<Type, Func<GameObject, DisplayInfo>> {
-            { typeof(Connection), obj => ConnectionView.GetDisplayInfo(obj) },
-            { typeof(Item), obj => ItemView.GetDisplayInfo(obj) },
-            { typeof(Entity), obj => EntityView.GetDisplayInfo(obj) },
-            { typeof(Wall), obj => WallView.GetDisplayInfo(obj) }
-        };
+    public class MainView {
+        private ConnectionView _connectionView = new ConnectionView();
+        private ItemView _itemView = new ItemView();
+        private EntityView _entityView = new EntityView();
+        private WallView _wallView = new WallView();
 
-        public static GameObject? GetPriorityObject(List<GameObject> objects) {
+        private readonly Dictionary<Type, Func<GameObject, DisplayInfo>> viewMap;
+
+        public MainView() {
+            viewMap = new Dictionary<Type, Func<GameObject, DisplayInfo>> {
+                { typeof(Connection), obj => _connectionView.GetDisplayInfo(obj) },
+                { typeof(Item), obj => _itemView.GetDisplayInfo(obj) },
+                { typeof(Entity), obj => _entityView.GetDisplayInfo(obj) },
+                { typeof(Wall), obj => _wallView.GetDisplayInfo(obj) }
+            };
+        }
+
+        public void PrintPriorityObject(List<GameObject> objects) {
+            GameObject priorityObject = GetPriorityObject(objects);
+            DisplayInfo displayInfo = GetDisplayInfo(priorityObject);
+            PrintHelper.PrintColoredCharacter(displayInfo.Character, displayInfo.Color);
+        }
+
+        public GameObject? GetPriorityObject(List<GameObject> objects) {
             List<Type> priorityList = new List<Type> { typeof(Player), typeof(EnemyAdapter) };
 
             objects.Sort((a, b) => {
@@ -29,36 +44,18 @@ namespace UserInterface.Views {
             return objects.FirstOrDefault();
         }
 
-        public static DisplayInfo GetDisplayInfo(GameObject obj) {
+        public DisplayInfo GetDisplayInfo(GameObject obj) {
             Type objType = obj.GetType();
             foreach (var kvp in viewMap) {
                 Type viewType = kvp.Key;
                 if (viewType.IsAssignableFrom(objType)) {
                     Func<GameObject, DisplayInfo> getDisplayInfo = kvp.Value;
                     DisplayInfo displayInfo = getDisplayInfo(obj);
-                    displayInfo.Color = GetObjectColor(obj, displayInfo.Color);
+                    displayInfo.Color = PrintHelper.GetObjectColor(obj, displayInfo.Color);
                     return displayInfo;
                 }
             }
             throw new ArgumentException($"Object of type '{obj.GetType()}' is not recognized");
         }
-
-        private static ConsoleColor? GetObjectColor(GameObject obj, ConsoleColor? defaultColor) {
-            var colorProperty = obj.GetType().GetProperty("Color");
-            if (colorProperty != null) {
-                string? colorName = (string?)colorProperty.GetValue(obj);
-                if (!string.IsNullOrEmpty(colorName)) {
-                    colorName = ToPascalCase(colorName);
-                    return (ConsoleColor)Enum.Parse(typeof(ConsoleColor), colorName);
-                }
-            }
-            return defaultColor;
-        }
-
-        private static string ToPascalCase(string str) {
-            if (string.IsNullOrEmpty(str)) return str;
-            return char.ToUpper(str[0]) + str.Substring(1).ToLower();
-        }
-
     }
 }
