@@ -44,6 +44,7 @@ namespace Data.Factories {
                 foreach (EnemyDTO enemyDto in dto.enemies) {
                     EnemyAdapter enemy = _enemyFactory.Create(enemyDto);
                     room.AddObject(enemy);
+                    enemy.CurrentRoom = room;
                 }
             }
 

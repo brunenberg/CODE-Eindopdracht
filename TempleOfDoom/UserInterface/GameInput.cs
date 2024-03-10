@@ -5,7 +5,8 @@ namespace UserInterface {
         MOVE_NORTH,
         MOVE_SOUTH,
         MOVE_EAST,
-        MOVE_WEST
+        MOVE_WEST,
+        SHOOT
     }
 
     public class GameInput {
@@ -20,7 +21,8 @@ namespace UserInterface {
             { ConsoleKey.D, Action.MOVE_EAST },
             { ConsoleKey.RightArrow, Action.MOVE_EAST },
             { ConsoleKey.S, Action.MOVE_SOUTH },
-            { ConsoleKey.DownArrow, Action.MOVE_SOUTH }
+            { ConsoleKey.DownArrow, Action.MOVE_SOUTH },
+            { ConsoleKey.Spacebar, Action.SHOOT }
         };
 
         public GameInput(Root root, GameOutput gameOutput) {
@@ -47,6 +49,9 @@ namespace UserInterface {
                     case Action.MOVE_WEST:
                         Direction direction = (Direction)Enum.Parse(typeof(Direction), action.ToString().Split('_')[1]);
                         shouldUpdateGameState = Root.Player.Move(Root, direction);
+                        break;
+                    case Action.SHOOT:
+                        shouldUpdateGameState = Root.Player.Shoot(Root);
                         break;
                 }
             }

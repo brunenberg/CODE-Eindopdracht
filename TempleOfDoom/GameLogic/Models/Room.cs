@@ -46,6 +46,11 @@ namespace GameLogic.Models {
             return objectsAtCoordinates;
         }
 
+        public List<Entity> GetEntityObjectsAt(int x, int y) {
+            List<Entity> entitiesAtCoordinates = GetObjectsAt(x, y).OfType<Entity>().ToList();
+            return entitiesAtCoordinates;
+        }
+
 
         public void MoveObject(GameObject obj, int newX, int newY) {
             if (CoordinateObjects.ContainsKey((obj.X, obj.Y)) && CoordinateObjects[(obj.X, obj.Y)].Contains(obj)) {
