@@ -94,20 +94,25 @@ namespace Data.Factories {
             int middleY = room.Height / 2;
             int middleX = room.Width / 2;
 
+            if (connection.Within == room.Id && x == connection.X && y == connection.Y) {
+                AddDoorToToggleDoorsList(connection, toggleDoors);
+                return true;
+            }
+
             if ((connection.North == room.Id || connection.South == room.Id) && y == (connection.North == room.Id ? room.Height - 1 : 0) && x == middleX) {
-                AddDoorToToggleDoorsList(room, connection, x, y, toggleDoors);
+                AddDoorToToggleDoorsList(connection, toggleDoors);
                 return true;
             }
 
             if ((connection.East == room.Id || connection.West == room.Id) && x == (connection.East == room.Id ? 0 : room.Width - 1) && y == middleY) {
-                AddDoorToToggleDoorsList(room, connection, x, y, toggleDoors);
+                AddDoorToToggleDoorsList(connection, toggleDoors);
                 return true;
             }
 
             return false;
         }
 
-        private void AddDoorToToggleDoorsList(Room room, Connection connection, int x, int y, List<ToggleDoor> toggleDoors) {
+        private void AddDoorToToggleDoorsList(Connection connection, List<ToggleDoor> toggleDoors) {
             IDoor door = connection.Door;
             if (door is ToggleDoor toggleDoor) {
                 toggleDoors.Add(toggleDoor);

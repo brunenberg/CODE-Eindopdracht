@@ -1,4 +1,5 @@
 ﻿
+using GameLogic.Items;
 using GameLogic.Models;
 
 namespace UserInterface {
@@ -21,6 +22,10 @@ namespace UserInterface {
                     Root.Player.InteractWithCurrentLocation(Root, Root.Player);
                     Console.Clear();
                     GameOutput.DisplayGameState();
+                }
+                int sankaraStoneAmount = Root.Player.Inventory.Count(item => item is SankaraStone);
+                if (sankaraStoneAmount >= 5) {
+                    Console.WriteLine("YOU WON");
                 }
             }
             Console.WriteLine("GAME OVER");

@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Data.DataReaderStrategy.DataReaderContext">
+    <Position X="26.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>DataReaderStrategy\DataReaderContext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_dataReader" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Data.DataReaderStrategy.JSONReader" BaseTypeListCollapsed="true">
+    <Position X="29" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataReaderStrategy\JSONReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Data.DataReaderStrategy.XMLReader" BaseTypeListCollapsed="true">
+    <Position X="31" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataReaderStrategy\XMLReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Data.Factories.ConnectionFactory">
+    <Position X="15.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\ConnectionFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_doorFactory" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Data.Factories.DoorFactory">
+    <Position X="15.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAA=</HashCode>
+      <FileName>Factories\DoorFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.Factories.EnemyFactory">
+    <Position X="19" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAQAAAAAAAAA=</HashCode>
+      <FileName>Factories\EnemyFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.Factories.ItemFactory">
+    <Position X="24.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\ItemFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.Factories.PlayerFactory">
+    <Position X="18.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\PlayerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.Factories.RoomFactory">
+    <Position X="21.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAEQAAgABAAgAAAA=</HashCode>
+      <FileName>Factories\RoomFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_specialFloorTileFactory" />
+      <Field Name="_enemyFactory" />
+      <Field Name="_itemFactory" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Data.Factories.RootFactory">
+    <Position X="18.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEABAAAAAAAAAAAACAAAAAAIEAIAIAAAAAAAAA=</HashCode>
+      <FileName>Factories\RootFactory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_roomFactory" />
+      <Field Name="_connectionFactory" />
+      <Field Name="_playerFactory" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Data.Factories.SpecialFloorTileFactory">
+    <Position X="21.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAEAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\SpecialFloorTileFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.RootDTO">
+    <Position X="30" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIACAAAAAAAAAABoAAAAAEAAAA=</HashCode>
+      <FileName>GameDTOs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ConnectionDTO" />
+      <Property Name="PlayerDTO" />
+      <Property Name="RoomDTO" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Data.RoomDTO">
+    <Position X="32.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAECBACAAAQAQAgAAAAAABABBAABAAAAAAAAAgA=</HashCode>
+      <FileName>GameDTOs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="SpecialFloorTileDTO" />
+      <Property Name="ItemDTO" />
+      <Property Name="EnemyDTO" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Data.ItemDTO">
+    <Position X="34.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAABAACAAABgAAAAAAA=</HashCode>
+      <FileName>GameDTOs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.DoorDTO">
+    <Position X="27.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAACAAAQAAAAAAAA=</HashCode>
+      <FileName>GameDTOs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.PlayerDTO">
+    <Position X="30" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAgAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameDTOs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.ConnectionDTO">
+    <Position X="27.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAEAAgAAAAAABBAAQAAAAAAAAAAEAQAAAAAAAAAA=</HashCode>
+      <FileName>GameDTOs.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DoorDTO" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Data.EnemyDTO">
+    <Position X="31" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAABgADAAAAA=</HashCode>
+      <FileName>GameDTOs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Data.SpecialFloorTileDTO">
+    <Position X="32.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAABgAAAAAAA=</HashCode>
+      <FileName>GameDTOs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Data.DataReaderStrategy.IDataReader">
+    <Position X="30" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataReaderStrategy\IDataReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -4,6 +4,24 @@
         public RoomDTO[]? rooms { get; set; }
         public ConnectionDTO[]? connections { get; set; }
         public PlayerDTO? player { get; set; }
+
+        public ConnectionDTO ConnectionDTO {
+            get => default;
+            set {
+            }
+        }
+
+        public PlayerDTO PlayerDTO {
+            get => default;
+            set {
+            }
+        }
+
+        public RoomDTO RoomDTO {
+            get => default;
+            set {
+            }
+        }
     }
     public class RoomDTO {
         private int _width;
@@ -25,6 +43,24 @@
         public ItemDTO[]? items { get; set; }
         public EnemyDTO[]? enemies { get; set; }
         public SpecialFloorTileDTO[]? specialFloorTiles { get; set; }
+
+        public SpecialFloorTileDTO SpecialFloorTileDTO {
+            get => default;
+            set {
+            }
+        }
+
+        public ItemDTO ItemDTO {
+            get => default;
+            set {
+            }
+        }
+
+        public EnemyDTO EnemyDTO {
+            get => default;
+            set {
+            }
+        }
     }
 
 
@@ -57,6 +93,12 @@
         public DoorDTO[]? doors { get; set; }
         public bool? horizontal { get; set; }
         public int? within { get; set; }
+
+        public DoorDTO DoorDTO {
+            get => default;
+            set {
+            }
+        }
     }
 
     public class EnemyDTO {
