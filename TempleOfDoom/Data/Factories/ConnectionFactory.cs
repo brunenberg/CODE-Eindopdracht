@@ -2,9 +2,14 @@
 
 namespace Data.Factories {
     public class ConnectionFactory {
+        private DoorFactory _doorFactory;
+
+        public ConnectionFactory() {
+            _doorFactory = new DoorFactory();
+        }
         public Connection Create(ConnectionDTO dto) {
             Connection connection = new Connection {
-                Door = DoorFactory.Create(dto.doors),
+                Door = _doorFactory.Create(dto.doors),
                 IsHorizontal = dto.horizontal
             };
 

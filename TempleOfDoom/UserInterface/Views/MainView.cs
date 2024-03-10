@@ -22,6 +22,12 @@ namespace UserInterface.Views {
             };
         }
 
+        public DisplayInfo DisplayInfo {
+            get => default;
+            set {
+            }
+        }
+
         public void PrintPriorityObject(List<GameObject> objects) {
             GameObject priorityObject = GetPriorityObject(objects);
             DisplayInfo displayInfo = GetDisplayInfo(priorityObject);

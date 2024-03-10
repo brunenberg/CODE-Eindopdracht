@@ -7,6 +7,12 @@ namespace UserInterface {
     internal class Program {
         private const string LevelPath = "Data/Levels/TempleOfDoom_Extended_C_2223.json";
 
+        public GameEngine GameEngine {
+            get => default;
+            set {
+            }
+        }
+
         static void Main(string[] args) {
             Root root = LoadRootFromData();
             new GameEngine(root, LevelPath).Run();
