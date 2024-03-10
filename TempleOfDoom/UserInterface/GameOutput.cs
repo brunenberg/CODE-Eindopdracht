@@ -1,25 +1,24 @@
-﻿using GameLogic.Models;
-using UserInterface.Observers;
+﻿using GameLogic.Entities;
+using GameLogic.Models;
 using UserInterface.Views;
 
-namespace UserInterface {
+namespace UserInterface
+{
     public class GameOutput {
         private Root _root { get; set; }
         private string _currentLevel { get; set; }
         private MainView _mainView { get; set; }
-        private PlayerStatsDisplayElement _playerStatsDisplay { get; set; }
 
         public GameOutput(Root root, string levelPath) {
             _root = root;
             _currentLevel = levelPath;
             _mainView = new MainView();
-            _playerStatsDisplay = new PlayerStatsDisplayElement();
         }
 
         public void DisplayGameState() {
             StartMessage();
             DrawRoom();
-            _playerStatsDisplay.OnNext(_root.Player);
+            DisplayStats(_root.Player);
         }
 
         public void StartMessage() {
@@ -41,6 +40,21 @@ namespace UserInterface {
                 }
                 Console.WriteLine();
             }
+        }
+
+        public void DisplayStats(Player player) {
+            Console.WriteLine($"Lives: {player.Lives}");
+
+            Console.Write("Inventory: ");
+            for (int i = 0; i < player.Inventory.Count; i++) {
+                var item = player.Inventory[i];
+                ConsoleColor? color = PrintHelper.GetObjectColor(item, null);
+                PrintHelper.PrintColoredString(item.Type, color);
+                if (i < player.Inventory.Count - 1) {
+                    Console.Write(", ");
+                }
+            }
+            Console.WriteLine();
         }
     }
 }
