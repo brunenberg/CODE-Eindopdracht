@@ -28,7 +28,7 @@ namespace UserInterface {
                     Console.WriteLine("YOU WON");
                 }
             }
-            Console.WriteLine("GAME OVER");
+            Console.WriteLine("YOU DIED");
         }
     }
 }
