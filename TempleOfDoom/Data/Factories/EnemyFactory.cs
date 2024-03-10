@@ -1,4 +1,5 @@
 ﻿using CODE_TempleOfDoom_DownloadableContent;
+using GameLogic.Entities;
 
 namespace Data.Factories {
     public class EnemyFactory {
@@ -19,7 +20,15 @@ namespace Data.Factories {
 
             EnemyAdapter enemyAdapter = new EnemyAdapter(enemy);
 
+            enemyAdapter.OnDeath += Enemy_OnDeath;
+
             return enemyAdapter;
+        }
+
+        private void Enemy_OnDeath(object sender) {
+            if (sender is Entity entity) {
+                entity.CurrentRoom.RemoveObject(entity);
+            }
         }
     }
 }

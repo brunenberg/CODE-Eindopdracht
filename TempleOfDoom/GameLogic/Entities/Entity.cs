@@ -7,6 +7,7 @@ namespace GameLogic.Entities {
         public Room CurrentRoom { get; set; }
         public int Lives { get; set; }
         public Direction LastMovedDirection { get; set; }
+        public event Action<object> OnDeath;
 
         public bool Move(Root root, Direction direction) {
             if (this is Entity entity) {
@@ -38,6 +39,13 @@ namespace GameLogic.Entities {
                 if (obj is IEnterable enterableObj) {
                     enterableObj.OnEnter(root, entity);
                 }
+            }
+        }
+
+        public void TakeDamage(int damage) {
+            Lives -= damage;
+            if (Lives <= 0) {
+                OnDeath?.Invoke(this);
             }
         }
 

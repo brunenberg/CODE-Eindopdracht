@@ -8,10 +8,12 @@ namespace Data.Factories {
     public class RoomFactory {
         private ItemFactory _itemFactory;
         private EnemyFactory _enemyFactory;
+        private SpecialFloorTileFactory _specialFloorTileFactory;
 
         public RoomFactory() {
             _itemFactory = new ItemFactory();
             _enemyFactory = new EnemyFactory();
+            _specialFloorTileFactory = new SpecialFloorTileFactory();
         }
 
         public Room Create(RoomDTO dto, List<Connection> connections, Player player, int startRoomId) {
@@ -64,12 +66,17 @@ namespace Data.Factories {
                             }
                         }
                         if (!isDoor) {
-                            Wall wall = new Wall();
-                            wall.X = x;
-                            wall.Y = y;
+                            Wall wall = new Wall { X = x, Y = y};
                             room.AddObject(wall);
                         }
                     }
+                }
+            }
+
+            if (dto.specialFloorTiles != null) {
+                foreach (SpecialFloorTileDTO specialFloorTileDto in dto.specialFloorTiles) {
+                    GameObject specialFloorTile = _specialFloorTileFactory.Create(specialFloorTileDto, room, connections);
+                    room.AddObject(specialFloorTile);
                 }
             }
 

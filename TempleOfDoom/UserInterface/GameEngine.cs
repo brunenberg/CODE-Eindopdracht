@@ -15,20 +15,15 @@ namespace UserInterface {
 
         public void Run() {
             GameOutput.DisplayGameState();
-            while (true) {
+            while (Root.Player.Lives > 0) {
                 bool shouldUpdateGameState = GameInput.ProcessInput();
                 if (shouldUpdateGameState) {
                     Root.Player.InteractWithCurrentLocation(Root, Root.Player);
                     Console.Clear();
                     GameOutput.DisplayGameState();
                 }
-
-
-                // if (gameIsOver) {
-                //     break;
-                // }
             }
+            Console.WriteLine("GAME OVER");
         }
     }
-
 }

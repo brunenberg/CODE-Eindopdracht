@@ -41,7 +41,7 @@ namespace Data.Factories {
         private List<Room> CreateRooms(RootDTO dto, List<Connection> connections, Player player) {
             List<Room> rooms = new List<Room>();
             foreach (RoomDTO roomDTO in dto.rooms) {
-                List<Connection> roomConnections = connections.Where(c => c.North == roomDTO.id || c.South == roomDTO.id || c.West == roomDTO.id || c.East == roomDTO.id).ToList();
+                List<Connection> roomConnections = connections.Where(c => c.North == roomDTO.id || c.South == roomDTO.id || c.West == roomDTO.id || c.East == roomDTO.id || c.Within == roomDTO.id).ToList();
                 Room room = _roomFactory.Create(roomDTO, roomConnections, player, dto.player.startRoomId);
                 rooms.Add(room);
             }

@@ -1,7 +1,9 @@
 ﻿using CODE_TempleOfDoom_DownloadableContent;
 using GameLogic.Entities;
+using GameLogic.Interfaces;
+using GameLogic.Models;
 
-public class EnemyAdapter : Entity {
+public class EnemyAdapter : Entity, IEnterable {
     private Enemy _enemy;
 
     public EnemyAdapter(Enemy enemy) {
@@ -16,5 +18,13 @@ public class EnemyAdapter : Entity {
     public override int Y {
         get { return _enemy.CurrentYLocation; }
         set { _enemy.CurrentYLocation = value; }
+    }
+
+    public bool CanEntityEnter(Root root, Entity entity) {
+        return true;
+    }
+
+    public void OnEnter(Root root, Entity entity) {
+        entity.TakeDamage(1);
     }
 }

@@ -5,17 +5,20 @@ using GameLogic.Models;
 
 namespace UserInterface {
     internal class Program {
+        private const string LevelPath = "Data/Levels/TempleOfDoom_Extended_C_2223.json";
+
         static void Main(string[] args) {
+            Root root = LoadRootFromData();
+            new GameEngine(root, LevelPath).Run();
+        }
+
+        private static Root LoadRootFromData() {
             IDataReader reader = new JSONReader();
             DataReaderContext context = new DataReaderContext(reader);
-            string levelPath = "Data/Levels/TempleOfDoom.json";
-            RootDTO rootDTO = context.ReadDataFromFile(levelPath);
+            RootDTO rootDTO = context.ReadDataFromFile(LevelPath);
 
             RootFactory rootFactory = new RootFactory();
-
-            Root root = rootFactory.Create(rootDTO);
-
-            new GameEngine(root, levelPath).Run();
+            return rootFactory.Create(rootDTO);
         }
     }
 }

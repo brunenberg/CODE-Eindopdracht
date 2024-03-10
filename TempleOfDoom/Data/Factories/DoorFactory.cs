@@ -14,6 +14,8 @@ namespace Data.Factories {
         public static IDoor Create(DoorDTO[] dtos) {
             IDoor door = new Passage();
 
+            //door.IsHorizontal = 
+
             foreach (DoorDTO dto in dtos) {
                 if (doorDecorators.TryGetValue(dto.type, out Func<DoorDTO, IDoor, IDoor> createDecorator)) {
                     door = createDecorator(dto, door);
