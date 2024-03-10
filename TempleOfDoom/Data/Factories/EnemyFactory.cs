@@ -6,6 +6,7 @@ namespace Data.Factories {
         public EnemyAdapter Create(EnemyDTO dto) {
             Enemy enemy;
             int lives = 3;
+            int damage = 1;
 
             switch (dto.type) {
                 case "horizontal":
@@ -19,6 +20,8 @@ namespace Data.Factories {
             }
 
             EnemyAdapter enemyAdapter = new EnemyAdapter(enemy);
+
+            enemyAdapter.Damage = damage;
 
             enemyAdapter.OnDeath += Enemy_OnDeath;
 

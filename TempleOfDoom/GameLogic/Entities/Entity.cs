@@ -6,6 +6,7 @@ namespace GameLogic.Entities {
     public abstract class Entity : GameObject {
         public Room CurrentRoom { get; set; }
         public int Lives { get; set; }
+        public int Damage { get; set; }
         public Direction LastMovedDirection { get; set; }
         public event Action<object> OnDeath;
 

@@ -8,6 +8,7 @@ public class EnemyAdapter : Entity, IEnterable {
 
     public EnemyAdapter(Enemy enemy) {
         _enemy = enemy;
+        Lives = _enemy.NumberOfLives;
     }
 
     public override int X {
@@ -25,6 +26,6 @@ public class EnemyAdapter : Entity, IEnterable {
     }
 
     public void OnEnter(Root root, Entity entity) {
-        entity.TakeDamage(1);
+        entity.TakeDamage(Damage);
     }
 }
