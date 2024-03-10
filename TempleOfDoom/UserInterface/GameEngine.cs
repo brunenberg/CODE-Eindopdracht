@@ -26,9 +26,10 @@ namespace UserInterface {
                 int sankaraStoneAmount = Root.Player.Inventory.Count(item => item is SankaraStone);
                 if (sankaraStoneAmount >= 5) {
                     Console.WriteLine("YOU WON");
+                    return;
                 }
             }
-            Console.WriteLine("YOU DIED");
+            Console.WriteLine("GAME OVER");
         }
     }
 }
