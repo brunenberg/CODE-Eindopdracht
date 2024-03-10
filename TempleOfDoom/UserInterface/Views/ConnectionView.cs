@@ -8,7 +8,12 @@ namespace UserInterface.Views {
                 IDoor door = connection.Door;
                 bool isDecorator = false;
                 ConsoleColor? color = null;
-                char character = (connection.North != null || connection.South != null) ? '=' : '|';
+                char character;
+                if (connection.IsHorizontal.HasValue) {
+                    character = connection.IsHorizontal.Value ? '=' : '|';
+                } else {
+                    character = (connection.North != null || connection.South != null) ? '=' : '|';
+                }
 
                 while (door != null) {
                     if (door is ClosingGateDoor) {

@@ -141,7 +141,6 @@
 					"y": 2
 				}
 			 ]
-		  
 		},
 		{
 			"id": 5,
@@ -293,10 +292,10 @@
 			"horizontal": true,
 			"doors": [
 				{
-					"type": "toggle"
+					"type": "open on odd"
 				},
 				{
-					"type": "open on odd"
+					"type": "toggle"
 				}
 			]
 		},

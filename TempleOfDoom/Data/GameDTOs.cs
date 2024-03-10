@@ -30,7 +30,7 @@
 
     public class ItemDTO {
         public string? type { get; set; }
-        public int? damage { get; set; }
+        public int damage { get; set; }
         public int x { get; set; }
         public int y { get; set; }
         public string? color { get; set; }
@@ -52,9 +52,11 @@
     public class ConnectionDTO {
         public int? NORTH { get; set; }
         public int? SOUTH { get; set; }
-        public DoorDTO[]? doors { get; set; }
         public int? WEST { get; set; }
         public int? EAST { get; set; }
+        public DoorDTO[]? doors { get; set; }
+        public bool? horizontal { get; set; }
+        public int? within { get; set; }
     }
 
     public class EnemyDTO {

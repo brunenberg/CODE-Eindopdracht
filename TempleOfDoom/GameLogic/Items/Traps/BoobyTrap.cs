@@ -9,7 +9,7 @@ namespace GameLogic.Items.Traps {
         }
 
         public void OnEnter(Root root, Entity entity) {
-            entity.Lives -= (int)Damage;
+            entity.TakeDamage(Damage);
         }
     }
 }

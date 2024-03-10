@@ -9,6 +9,8 @@ namespace GameLogic.Models {
         public int? South { get; set; }
         public int? West { get; set; }
         public IDoor? Door { get; set; }
+        public bool? IsHorizontal { get; set; }
+        public int? Within { get; set; }
 
         public bool CanEntityEnter(Root root, Entity entity) {
             IDoor door = this.Door;
@@ -22,12 +24,34 @@ namespace GameLogic.Models {
         }
 
         public void OnEnter(Root root, Entity entity) {
+            if (this.Within.HasValue) {
+                MoveEntityWithinRoom(root, entity);
+            } else {
+                MoveEntityToNewRoom(root, entity);
+            }
+        }
+
+        private void MoveEntityWithinRoom(Root root, Entity entity) {
+            var directionToOffset = new Dictionary<Direction, (int dx, int dy)> {
+                { Direction.NORTH, (0, -1) },
+                { Direction.EAST, (1, 0) },
+                { Direction.SOUTH, (0, 1) },
+                { Direction.WEST, (-1, 0) }
+            };
+
+            if (directionToOffset.TryGetValue(entity.LastMovedDirection, out var offset)) {
+                entity.CurrentRoom.MoveObject(entity, X + offset.dx, Y + offset.dy);
+            }
+            entity.InteractWithCurrentLocation(root, entity);
+        }
+
+        private void MoveEntityToNewRoom(Root root, Entity entity) {
             var directionToRoomId = new Dictionary<Direction, int?> {
-        { Direction.NORTH, North },
-        { Direction.EAST, East },
-        { Direction.SOUTH, South },
-        { Direction.WEST, West }
-    };
+                { Direction.NORTH, North },
+                { Direction.EAST, East },
+                { Direction.SOUTH, South },
+                { Direction.WEST, West }
+            };
 
             const int offset = 1;
 
@@ -36,23 +60,15 @@ namespace GameLogic.Models {
                 Room newRoom = root.Rooms.FirstOrDefault(room => room.Id == roomId);
                 entity.CurrentRoom = newRoom;
 
-                switch (entity.LastMovedDirection) {
-                    case Direction.NORTH:
-                        entity.X = newRoom.Width / 2;
-                        entity.Y = newRoom.Height - 1 - offset;
-                        break;
-                    case Direction.EAST:
-                        entity.X = offset;
-                        entity.Y = newRoom.Height / 2;
-                        break;
-                    case Direction.SOUTH:
-                        entity.X = newRoom.Width / 2;
-                        entity.Y = offset;
-                        break;
-                    case Direction.WEST:
-                        entity.X = newRoom.Width - 1 - offset;
-                        entity.Y = newRoom.Height / 2;
-                        break;
+                var directionToPosition = new Dictionary<Direction, (int x, int y)> {
+                    { Direction.NORTH, (newRoom.Width / 2, newRoom.Height - 1 - offset) },
+                    { Direction.EAST, (offset, newRoom.Height / 2) },
+                    { Direction.SOUTH, (newRoom.Width / 2, offset) },
+                    { Direction.WEST, (newRoom.Width - 1 - offset, newRoom.Height / 2) }
+                };
+
+                if (directionToPosition.TryGetValue(entity.LastMovedDirection, out var position)) {
+                    entity.UpdateLocation(position.x, position.y);
                 }
 
                 newRoom.AddObject(entity);
