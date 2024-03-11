@@ -292,10 +292,10 @@
 			"horizontal": true,
 			"doors": [
 				{
-					"type": "open on odd"
+					"type": "toggle"
 				},
 				{
-					"type": "toggle"
+					"type": "open on odd"
 				}
 			]
 		},
@@ -314,11 +314,11 @@
 			"horizontal": true,
 			"doors": [
 				{
-					"type": "colored",
-					"color": "red"
+					"type": "toggle"
 				},
 				{
-					"type": "toggle"
+					"type": "colored",
+					"color": "red"
 				}
 			]
 		}

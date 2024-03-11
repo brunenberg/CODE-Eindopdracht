@@ -1,5 +1,6 @@
 using GameLogic.Decorators;
 using GameLogic.Entities;
+using GameLogic.Interfaces;
 using GameLogic.Items;
 using GameLogic.Models;
 using GameLogic.Tiles;
@@ -114,9 +115,14 @@ namespace Data.Factories {
 
         private void AddDoorToToggleDoorsList(Connection connection, List<ToggleDoor> toggleDoors) {
             IDoor door = connection.Door;
-            if (door is ToggleDoor toggleDoor) {
-                toggleDoors.Add(toggleDoor);
+
+            while (door != null) {
+                if (door is ToggleDoor toggleDoor) {
+                    toggleDoors.Add(toggleDoor);
+                }
+                door = door.GetUnderlyingDoor();
             }
+            
         }
     }
 }
