@@ -19,7 +19,6 @@ namespace Data.Factories {
             if (connection == null) {
                 throw new ArgumentException($"No connection found with Within value '{room.Id}'");
             }
-            room.AddObjectOnLocation(connection, dto.x, dto.y);
             return connection;
         }
 

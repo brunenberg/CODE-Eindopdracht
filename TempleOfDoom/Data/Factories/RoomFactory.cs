@@ -1,6 +1,5 @@
 using GameLogic.Decorators;
 using GameLogic.Entities;
-using GameLogic.Interfaces;
 using GameLogic.Items;
 using GameLogic.Models;
 using GameLogic.Tiles;
@@ -79,6 +78,9 @@ namespace Data.Factories {
                 foreach (SpecialFloorTileDTO specialFloorTileDto in dto.specialFloorTiles) {
                     GameObject specialFloorTile = _specialFloorTileFactory.Create(specialFloorTileDto, room, connections);
                     room.AddObject(specialFloorTile);
+                    if (specialFloorTile is Connection connection) {
+                        AddToggleDoorsIfPresent(connection, toggleDoors);
+                    }
                 }
             }
 
@@ -95,25 +97,20 @@ namespace Data.Factories {
             int middleY = room.Height / 2;
             int middleX = room.Width / 2;
 
-            if (connection.Within == room.Id && x == connection.X && y == connection.Y) {
-                AddDoorToToggleDoorsList(connection, toggleDoors);
-                return true;
-            }
-
             if ((connection.North == room.Id || connection.South == room.Id) && y == (connection.North == room.Id ? room.Height - 1 : 0) && x == middleX) {
-                AddDoorToToggleDoorsList(connection, toggleDoors);
+                AddToggleDoorsIfPresent(connection, toggleDoors);
                 return true;
             }
 
             if ((connection.East == room.Id || connection.West == room.Id) && x == (connection.East == room.Id ? 0 : room.Width - 1) && y == middleY) {
-                AddDoorToToggleDoorsList(connection, toggleDoors);
+                AddToggleDoorsIfPresent(connection, toggleDoors);
                 return true;
             }
 
             return false;
         }
 
-        private void AddDoorToToggleDoorsList(Connection connection, List<ToggleDoor> toggleDoors) {
+        private void AddToggleDoorsIfPresent(Connection connection, List<ToggleDoor> toggleDoors) {
             IDoor door = connection.Door;
 
             while (door != null) {
@@ -122,7 +119,6 @@ namespace Data.Factories {
                 }
                 door = door.GetUnderlyingDoor();
             }
-            
         }
     }
 }
