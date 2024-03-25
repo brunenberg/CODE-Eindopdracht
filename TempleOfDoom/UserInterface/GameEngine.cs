@@ -15,21 +15,33 @@ namespace UserInterface {
         }
 
         public void Run() {
+            bool gameIsRunning = true;
+
             GameOutput.DisplayGameState();
-            while (Root.Player.Lives > 0) {
+
+            while (gameIsRunning) {
                 bool shouldUpdateGameState = GameInput.ProcessInput();
                 if (shouldUpdateGameState) {
                     Root.Player.InteractWithCurrentLocation(Root, Root.Player);
                     Console.Clear();
                     GameOutput.DisplayGameState();
                 }
-                int sankaraStoneAmount = Root.Player.Inventory.Count(item => item is SankaraStone);
-                if (sankaraStoneAmount >= 5) {
-                    Console.WriteLine("YOU WON");
-                    return;
-                }
+                gameIsRunning = CheckGameStatus();
             }
-            Console.WriteLine("GAME OVER");
         }
+
+        private bool CheckGameStatus() {
+            int sankaraStoneAmount = Root.Player.Inventory.Count(item => item is SankaraStone);
+            if (sankaraStoneAmount >= 5) {
+                GameOutput.PrintWinMessage();
+                return false;
+            }
+            if (Root.Player.Lives <= 0) {
+                GameOutput.PrintLoseMessage();
+                return false;
+            }
+            return true;
+        }
+
     }
 }
