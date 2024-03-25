@@ -2,8 +2,7 @@
 using GameLogic.Models;
 using UserInterface.Views;
 
-namespace UserInterface
-{
+namespace UserInterface {
     public class GameOutput {
         private Root _root { get; set; }
         private string _currentLevel { get; set; }
@@ -55,6 +54,26 @@ namespace UserInterface
                 }
             }
             Console.WriteLine();
+        }
+
+        public void PrintLoseMessage() {
+            Console.WriteLine("========================================================");
+            Console.WriteLine("|     ____ ____ ____ ____      ____ ____ ____ ____     |");
+            Console.WriteLine("|    ||G |||A |||M |||E ||    ||O |||V |||E |||R ||    |");
+            Console.WriteLine("|    ||__|||__|||__|||__||    ||__|||__|||__|||__||    |");
+            Console.WriteLine("|    |/__\\|/__\\|/__\\|/__\\|    |/__\\|/__\\|/__\\|/__\\|    |");
+            Console.WriteLine("========================================================");
+        }
+
+        public void PrintWinMessage() {
+            Console.WriteLine("|     _   _ _____ _   _      _ _ _ _ __    _   _     |");
+            Console.WriteLine("|    | | | |  _  | | | |    | | | |_|  \\  | | | |    |");
+            Console.WriteLine("|    | |_| | | | | | | |    | | | | |   \\ | | | |    |");
+            Console.WriteLine("|    \\____ | | | | | | |    | | | | | |\\ \\| | |_|    |");
+            Console.WriteLine("|     ___/ | |_| | |_| |    | | | | | | \\   |  _     |");
+            Console.WriteLine("|    /____/\\_____/\\____/    \\_____|_|_|  \\__| |_|    |");
+
+
         }
     }
 }

@@ -67,7 +67,7 @@ namespace Data.Factories {
                             }
                         }
                         if (!isDoor) {
-                            Wall wall = new Wall { X = x, Y = y};
+                            Wall wall = new Wall { X = x, Y = y };
                             room.AddObject(wall);
                         }
                     }
