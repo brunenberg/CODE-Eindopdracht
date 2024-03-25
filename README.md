@@ -1,2 +1,2 @@
-# ToD_Herkansing
-Het is niet perfect, maar het is goed genoeg!
+# Temple Of Doom
+Opdracht voor school voor het leren omgaan met design patterns
