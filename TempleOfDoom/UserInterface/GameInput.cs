@@ -25,9 +25,19 @@ namespace UserInterface {
             { ConsoleKey.Spacebar, Action.SHOOT }
         };
 
+        private Dictionary<Action, Func<bool>> actionToFunctionMap;
+
         public GameInput(Root root, GameOutput gameOutput) {
             this.Root = root;
             this.GameOutput = gameOutput;
+
+            actionToFunctionMap = new Dictionary<Action, Func<bool>> {
+                { Action.MOVE_NORTH, () => Root.Player.Move(Root, Direction.NORTH) },
+                { Action.MOVE_SOUTH, () => Root.Player.Move(Root, Direction.SOUTH) },
+                { Action.MOVE_EAST, () => Root.Player.Move(Root, Direction.EAST) },
+                { Action.MOVE_WEST, () => Root.Player.Move(Root, Direction.WEST) },
+                { Action.SHOOT, () => Root.Player.Shoot(Root) }
+            };
         }
 
         public bool ProcessInput() {
@@ -42,17 +52,8 @@ namespace UserInterface {
         private bool HandleKeyPress(ConsoleKeyInfo keyInfo) {
             bool shouldUpdateGameState = false;
             if (keyToActionMap.TryGetValue(keyInfo.Key, out Action action)) {
-                switch (action) {
-                    case Action.MOVE_NORTH:
-                    case Action.MOVE_SOUTH:
-                    case Action.MOVE_EAST:
-                    case Action.MOVE_WEST:
-                        Direction direction = (Direction)Enum.Parse(typeof(Direction), action.ToString().Split('_')[1]);
-                        shouldUpdateGameState = Root.Player.Move(Root, direction);
-                        break;
-                    case Action.SHOOT:
-                        shouldUpdateGameState = Root.Player.Shoot(Root);
-                        break;
+                if (actionToFunctionMap.TryGetValue(action, out Func<bool> actionFunction)) {
+                    shouldUpdateGameState = actionFunction();
                 }
             }
             return shouldUpdateGameState;
