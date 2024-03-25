@@ -5,13 +5,7 @@ using GameLogic.Models;
 
 namespace UserInterface {
     internal class Program {
-        private const string LevelPath = "Data/Levels/TempleOfDoom_Extended_C_2223.json";
-
-        public GameEngine GameEngine {
-            get => default;
-            set {
-            }
-        }
+        private static string LevelPath = GetProjectRootPath("Data", "Levels", "TempleOfDoom_Extended_C_2223.json");
 
         static void Main(string[] args) {
             Root root = LoadRootFromData();
@@ -25,6 +19,11 @@ namespace UserInterface {
 
             RootFactory rootFactory = new RootFactory();
             return rootFactory.Create(rootDTO);
+        }
+
+        private static string GetProjectRootPath(params string[] paths) {
+            var projectPath = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.Parent.FullName;
+            return Path.Combine(projectPath, Path.Combine(paths));
         }
     }
 }
