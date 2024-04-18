@@ -1,2 +1,3 @@
 # Temple Of Doom
-Opdracht voor school voor het leren omgaan met design patterns
+
+This was an assignment for my study. The purpose of this assignment was to teach us how to implement design patterns for improving code quality and clarity.
